@@ -1,0 +1,25 @@
+{
+  "name": "TimeToGo",
+  "version": "0.0.1",
+  "authors": [
+    "Éverton Arruda <root@earruda.eti.br>"
+  ],
+  "description": "Time left to go home",
+  "main": "index.html",
+  "keywords": [
+    "timetogo"
+  ],
+  "license": "MIT",
+  "homepage": "http://earruda.eti.br",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui-router": "~0.2.15",
+    "angular": "~1.4.8"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "TimeToGo",
+  "version": "0.0.1",
+  "description": "Time left to go home",
+  "main": "index.html",
+  "dependencies": {},
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-serve": "^1.2.0",
+    "gulp-uglify": "^1.5.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "timetogo"
+  ],
+  "author": "Éverton Arruda <root@earruda.eti.br>",
+  "license": "MIT"
+}
