@@ -22,7 +22,8 @@ var APP_DIR = './app';
 gulp.task('js-libs', function () {
     gulp.src([
         BOWER_COMPONENTS_DIR + '/angular/angular.min.js',
-        BOWER_COMPONENTS_DIR + '/angular-ui-router/release/angular-ui-router.min.js'
+        BOWER_COMPONENTS_DIR + '/angular-ui-router/release/angular-ui-router.min.js',
+        BOWER_COMPONENTS_DIR + '/moment/min/moment.min.js'
     ])
         .pipe(concat('libs.js'))
         .pipe(gulp.dest(LIBS_DIR));

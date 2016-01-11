@@ -1,1 +1,26 @@
-<h1>{{ vm.message }}</h1>
+<div class="definitions">
+    Work hours/day: {{ vm.workHoursPerDay.format(vm.shortTimeFormat) }}
+    <br />
+    Time you got in:
+    <select ng-model="vm.startTime.hours"
+            ng-change="vm.onStartTimeChange()"
+            ng-options="hours for hours in vm.timeRange.hours track by hours">
+    </select>
+
+    <select ng-model="vm.startTime.minutes"
+            ng-change="vm.onStartTimeChange()"
+            ng-options="minutes for minutes in vm.timeRange.minutes track by minutes">
+    </select>
+</div>
+
+<div class="time-to-go">
+    Time you'll get out: {{ vm.timeToGetOut.format(vm.longTimeFormat) }}
+</div>
+
+<div class="remaining-time" ng-hide="vm.isTimeToGo">
+    Remaining Time: {{ vm.remainingTime.format(vm.longTimeFormat) }}
+</div>
+
+<div class="time-to-go-message" ng-show="vm.isTimeToGo">
+    <h3>TIME TO GO HOME, MOTHERFUCKER!</h3>
+</div>
