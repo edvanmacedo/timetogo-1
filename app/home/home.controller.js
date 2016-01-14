@@ -9,7 +9,7 @@
     /**
      * Home Controller
      */
-    function HomeController($scope, $interval) {
+    function HomeController($scope, $interval, $mdDialog) {
         var vm = this;
 
         // Private Attributes
@@ -21,13 +21,14 @@
         vm.shortTimeFormat = 'HH:mm';
         vm.longTimeFormat = 'HH:mm:ss';
         vm.workHoursPerDay = moment({ hours: 9, minutes: 13 });
-        vm.timeRange = { hours: [], minutes: [] };
-        vm.startTime = { hours: 0, minutes: 0, moment: moment({ hours: 0, minutes: 0 }) };
+        vm.startTime = moment({ hours: 0, minutes: 0 });
         vm.timeToGetOut = moment({ hours: 0, minutes: 0 });
         vm.remainingTime = moment({ hours: 0, minutes: 0 });
 
         // Public Methods
-        vm.onStartTimeChange = onStartTimeChange;
+        vm.onStartTimeChanged = onStartTimeChanged;
+        vm.onStartTimeClicked = onStartTimeClicked;
+        vm.onWorkHoursPerDayClicked = onWorkHoursPerDayClicked;
 
         // Class activation
         activate();
@@ -36,17 +37,6 @@
          * Methods declarations
          */
         function activate() {
-            // time ranges
-            for (var i = 0; i < 24; i++) {
-                vm.timeRange.hours.push(i);
-            }
-
-            for (var i = 0; i < 60; i++) {
-                vm.timeRange.minutes.push(i);
-            }
-
-            calculateTimeToGo();
-
             $scope.$on('$destroy', onDestroy);
         }
 
@@ -54,19 +44,25 @@
             stopCountdown();
         }
 
-        function onStartTimeChange() {
-            vm.startTime.moment = moment({
-                hours: vm.startTime.hours,
-                minutes: vm.startTime.minutes
-            });
+        function onWorkHoursPerDayChanged() {
+            updateTimeToGo();
+            updateRemainingTime();
+            startCountdown();
+        }
 
-            calculateTimeToGo();
-            calculateRemainingTime();
+        function onStartTimeChanged() {
+            updateTimeToGo();
+            updateRemainingTime();
             startCountdown();
         }
 
         function calculateTimeToGo() {
-            vm.timeToGetOut = vm.startTime.moment.add(vm.workHoursPerDay);
+            vm.timeToGetOut = moment({
+                hours: vm.startTime.get('hour'),
+                minutes: vm.startTime.get('minute')
+            });
+
+            vm.timeToGetOut.add(vm.workHoursPerDay);
         }
 
         function calculateRemainingTime() {
@@ -94,6 +90,10 @@
             vm.isTimeToGo = true;
         }
 
+        function updateTimeToGo() {
+            calculateTimeToGo();
+        }
+
         function updateRemainingTime() {
             calculateRemainingTime();
 
@@ -106,12 +106,62 @@
                 vm.isTimeToGo = false;
             }
         }
+
+        function onStartTimeClicked() {
+            var dialogOptions = {
+                templateUrl: 'app/timeinputdialog/timeinputdialog.template.html',
+                controller: 'TimeInputDialogController',
+                controllerAs: 'vm',
+                clickOutsideToClose: true,
+                locals: {
+                    member: 'startTime'
+                }
+            };
+
+            $mdDialog.show(dialogOptions)
+                .then(onGetTimeInputOk, onGetTimeInputCancel);
+        }
+
+        function onWorkHoursPerDayClicked() {
+            var dialogOptions = {
+                templateUrl: 'app/timeinputdialog/timeinputdialog.template.html',
+                controller: 'TimeInputDialogController',
+                controllerAs: 'vm',
+                clickOutsideToClose: true,
+                locals: {
+                    member: 'workHoursPerDay'
+                }
+            };
+
+            $mdDialog.show(dialogOptions)
+                .then(onGetTimeInputOk, onGetTimeInputCancel);
+        }
+
+        function onGetTimeInputOk(response) {
+            switch (response.member) {
+            case 'workHoursPerDay':
+                vm.workHoursPerDay = response.time;
+                onWorkHoursPerDayChanged();
+                break;
+
+            case 'startTime':
+                vm.startTime = response.time;
+                onStartTimeChanged();
+                break;
+
+            }
+        }
+
+        function onGetTimeInputCancel() {
+            // Do nothing
+        }
     }
 
     // dependency injection
     HomeController.$inject = [
         '$scope',
-        '$interval'
+        '$interval',
+        '$mdDialog'
     ];
 
 })();

@@ -1,26 +1,37 @@
-<div class="definitions">
-    Work hours/day: {{ vm.workHoursPerDay.format(vm.shortTimeFormat) }}
-    <br />
-    Time you got in:
-    <select ng-model="vm.startTime.hours"
-            ng-change="vm.onStartTimeChange()"
-            ng-options="hours for hours in vm.timeRange.hours track by hours">
-    </select>
+<div layout="column" class="text-align-center">
+    <div>
+        <label>Work hours per day:</label>
+    </div>
 
-    <select ng-model="vm.startTime.minutes"
-            ng-change="vm.onStartTimeChange()"
-            ng-options="minutes for minutes in vm.timeRange.minutes track by minutes">
-    </select>
+    <div>
+        <md-button ng-click="vm.onWorkHoursPerDayClicked()">
+            <span class="md-display-1">{{ vm.workHoursPerDay.format(vm.shortTimeFormat) }}</span>
+        </md-button>
+    </div>
 </div>
 
-<div class="time-to-go">
-    Time you'll get out: {{ vm.timeToGetOut.format(vm.longTimeFormat) }}
+<div layout="column" class="text-align-center">
+    <div>
+        <label>Time you got in:</label>
+    </div>
+
+    <div>
+        <md-button class="md-raised" ng-click="vm.onStartTimeClicked()">
+            <span class="md-display-1">{{ vm.startTime.format(vm.shortTimeFormat) }}</span>
+        </md-button>
+    </div>
 </div>
 
-<div class="remaining-time" ng-hide="vm.isTimeToGo">
-    Remaining Time: {{ vm.remainingTime.format(vm.longTimeFormat) }}
+<div layout="column" layout-align="center center" class="time-to-get-out">
+    <h2 class="md-subhead">Time you'll get out:</h2>
+    <p class="md-display-2">{{ vm.timeToGetOut.format(vm.longTimeFormat) }}</p>
 </div>
 
-<div class="time-to-go-message" ng-show="vm.isTimeToGo">
-    <h3>TIME TO GO HOME, MOTHERFUCKER!</h3>
+<div layout="column" layout-align="center center" class="remaining-time centered-text" ng-hide="vm.isTimeToGo">
+    <h2 class="md-subhead">Remaining Time:</h2>
+    <p class="md-display-2">{{ vm.remainingTime.format(vm.longTimeFormat) }}</p>
+</div>
+
+<div layout="column" layout-align="center center" class="time-to-go-message centered-text" ng-show="vm.isTimeToGo">
+    <h2 class="md-display-2">TIME TO GO HOME, MOTHERFUCKER!</h2>
 </div>

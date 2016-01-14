@@ -1,0 +1,24 @@
+<md-dialog layout="column" class="text-align-center">
+    <div>
+        <h2>Select time</h2>
+    </div>
+
+    <div>
+        <md-input-container>
+            <md-select ng-model="vm.time.hours" placeholder="hours">
+                <md-option ng-repeat="hours in vm.timeRange.hours track by hours" ng-value="hours">{{ hours }}</md-options>
+            </md-select>
+        </md-input-container>
+
+        <md-input-container>
+            <md-select ng-model="vm.time.minutes" placeholder="minutes">
+                <md-option ng-repeat="minutes in vm.timeRange.minutes track by minutes" ng-value="minutes">{{ minutes }}</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+
+    <div layout="row">
+        <md-button ng-click="vm.onCancelButtonPressed()" flex>Cancel</md-button>
+        <md-button class="md-primary" ng-click="vm.onOkButtonPressed()" flex>Ok</md-button>
+    </div>
+</md-dialog>
