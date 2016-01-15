@@ -19,6 +19,12 @@
                 templateUrl: 'app/home/home.template.html',
                 controller: 'HomeController',
                 controllerAs: 'vm'
+            })
+            .state('timetogo', {
+                url: '/timetogo',
+                templateUrl: 'app/timetogo/timetogo.template.html',
+                controller: 'TimeToGoController',
+                controllerAs: 'vm'
             });
 
         $urlRouterProvider

@@ -1,9 +1,24 @@
 @charset "UTF-8";
 
+.content-wrapper {
+    height: 100%;
+}
+
 .text-align-center {
     text-align: center;
 }
 
 .text-align-right {
     text-align: right;
+}
+
+/** TimeToGo page styles **/
+.style-1 {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+.style-2 {
+    background-color: #ffffff;
+    color: #000000;
 }

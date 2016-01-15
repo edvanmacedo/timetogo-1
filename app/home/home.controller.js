@@ -9,7 +9,7 @@
     /**
      * Home Controller
      */
-    function HomeController($scope, $interval, $mdDialog) {
+    function HomeController($scope, $interval, $mdDialog, $state) {
         var vm = this;
 
         // Private Attributes
@@ -87,7 +87,7 @@
 
         function countdownEnded() {
             stopCountdown();
-            vm.isTimeToGo = true;
+            $state.go('timetogo');
         }
 
         function updateTimeToGo() {
@@ -161,7 +161,8 @@
     HomeController.$inject = [
         '$scope',
         '$interval',
-        '$mdDialog'
+        '$mdDialog',
+        '$state'
     ];
 
 })();

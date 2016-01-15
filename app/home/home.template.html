@@ -16,7 +16,7 @@
     </div>
 
     <div>
-        <md-button class="md-raised" ng-click="vm.onStartTimeClicked()">
+        <md-button class="md-warn" ng-click="vm.onStartTimeClicked()">
             <span class="md-display-1">{{ vm.startTime.format(vm.shortTimeFormat) }}</span>
         </md-button>
     </div>
@@ -30,8 +30,4 @@
 <div layout="column" layout-align="center center" class="remaining-time centered-text" ng-hide="vm.isTimeToGo">
     <h2 class="md-subhead">Remaining Time:</h2>
     <p class="md-display-2">{{ vm.remainingTime.format(vm.longTimeFormat) }}</p>
-</div>
-
-<div layout="column" layout-align="center center" class="time-to-go-message centered-text" ng-show="vm.isTimeToGo">
-    <h2 class="md-display-2">TIME TO GO HOME, MOTHERFUCKER!</h2>
 </div>
