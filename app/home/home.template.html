@@ -1,33 +1,27 @@
-<div layout="column" class="text-align-center">
-    <div>
-        <label>Work hours per day:</label>
+<div layout="column" layout-fill layout-align="center center" class="text-align-center" layout-padding>
+    <div layout="row" layout-padding layout-margin>
+        <div layout="column" class="work-hours-per-day">
+            <label class="md-subhead">Work hours/day</label>
+            <md-button ng-click="vm.onWorkHoursPerDayClicked()">
+                <span class="md-display-1">{{ vm.workHoursPerDay.format(vm.shortTimeFormat) }}</span>
+            </md-button>
+        </div>
+
+        <div layout="column" class="time-got-in">
+            <label class="md-subhead">Time you got in</label>
+            <md-button class="md-warn" ng-click="vm.onStartTimeClicked()">
+                <span class="md-display-1">{{ vm.startTime.format(vm.shortTimeFormat) }}</span>
+            </md-button>
+        </div>
     </div>
 
-    <div>
-        <md-button ng-click="vm.onWorkHoursPerDayClicked()">
-            <span class="md-display-1">{{ vm.workHoursPerDay.format(vm.shortTimeFormat) }}</span>
-        </md-button>
-    </div>
-</div>
-
-<div layout="column" class="text-align-center">
-    <div>
-        <label>Time you got in:</label>
+    <div layout="column" class="time-to-get-out" flex="20" layout-align="center center">
+        <label class="md-subhead">Time you'll get out</label>
+        <div class="md-display-2">{{ vm.timeToGetOut.format(vm.longTimeFormat) }}</div>
     </div>
 
-    <div>
-        <md-button class="md-warn" ng-click="vm.onStartTimeClicked()">
-            <span class="md-display-1">{{ vm.startTime.format(vm.shortTimeFormat) }}</span>
-        </md-button>
+    <div layout="column" class="remaining-time" flex="20" layout-align="center center">
+        <label class="md-subhead">Remaining Time</label>
+        <div class="md-display-2">{{ vm.remainingTime.format(vm.longTimeFormat) }}</div>
     </div>
-</div>
-
-<div layout="column" layout-align="center center" class="time-to-get-out">
-    <h2 class="md-subhead">Time you'll get out:</h2>
-    <p class="md-display-2">{{ vm.timeToGetOut.format(vm.longTimeFormat) }}</p>
-</div>
-
-<div layout="column" layout-align="center center" class="remaining-time centered-text" ng-hide="vm.isTimeToGo">
-    <h2 class="md-subhead">Remaining Time:</h2>
-    <p class="md-display-2">{{ vm.remainingTime.format(vm.longTimeFormat) }}</p>
 </div>

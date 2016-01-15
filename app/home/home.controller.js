@@ -17,7 +17,6 @@
         var zeroTime = moment({ hours: 0, minutes: 0, seconds: 0 });
 
         // Public Attributes
-        vm.isTimeToGo = false;
         vm.shortTimeFormat = 'HH:mm';
         vm.longTimeFormat = 'HH:mm:ss';
         vm.workHoursPerDay = moment({ hours: 9, minutes: 13 });
@@ -102,8 +101,6 @@
 
             if (remainingTimeString === zeroTimeString) {
                 countdownEnded();
-            } else {
-                vm.isTimeToGo = false;
             }
         }
 
