@@ -2,21 +2,25 @@
  * LIBS
  */
 
-var gulp = require('gulp');
-var concat = require('gulp-concat');
-var serve = require('gulp-serve');
-var del = require('del');
-var sass = require('gulp-sass');
+var gulp    = require('gulp');
+var concat  = require('gulp-concat');
+var serve   = require('gulp-serve');
+var del     = require('del');
+var sass    = require('gulp-sass');
 
 /**
  * Variables
  */
 
-var BOWER_COMPONENTS_DIR = './bower_components';
-var LIBS_DIR = './assets/lib';
-var APP_DIR = './app';
-var CSS_DIR = './assets/css';
-var SCSS_DIR = './assets/scss';
+var BOWER_COMPONENTS_DIR    = 'bower_components';
+var LIBS_DIR                = 'assets/lib';
+var APP_DIR                 = 'app';
+var CSS_DIR                 = 'assets/css';
+var SCSS_DIR                = 'assets/scss';
+var DIST_DIR                = 'dist';
+var DIST_CSS_DIR            = 'dist/' + CSS_DIR;
+var DIST_LIBS_DIR           = 'dist/' + LIBS_DIR;
+var DIST_APP_DIR            = 'dist/' + APP_DIR;
 
 /**
  * TASKS
@@ -69,3 +73,32 @@ gulp.task('css-app', function () {
 });
 
 gulp.task('css', ['css-libs', 'css-app']);
+
+gulp.task('css-clean', function () {
+    del(CSS_DIR + '/app.css');
+});
+
+gulp.task('copy-files-to-dist', function () {
+    gulp.src([
+        APP_DIR + '/**/*.template.html',
+        APP_DIR + '/app.js'
+    ])
+        .pipe(gulp.dest(DIST_APP_DIR));
+
+    gulp.src(CSS_DIR + '/app.css')
+        .pipe(gulp.dest(DIST_CSS_DIR));
+
+    gulp.src(LIBS_DIR + '/**/*')
+        .pipe(gulp.dest(DIST_LIBS_DIR));
+
+    gulp.src('index.html')
+        .pipe(gulp.dest(DIST_DIR));
+});
+
+gulp.task('build', ['css', 'js', 'copy-files-to-dist']);
+
+gulp.task('build-clean', function () {
+    del(DIST_DIR);
+});
+
+gulp.task('clean', ['css-clean', 'js-clean', 'build-clean'])
