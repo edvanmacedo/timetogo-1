@@ -14,6 +14,7 @@
          */
         var stylesAvailable = [];
         var timer = undefined;
+        var titles = ['TIME TO GO', 'time to go'];
 
         /*
          * Public Attributes
@@ -47,6 +48,12 @@
             }
 
             vm.style = stylesAvailable[i];
+
+            if (i % 2 == 0) {
+                document.querySelector('title').innerHTML = titles[0];
+            } else {
+                document.querySelector('title').innerHTML = titles[1];
+            }
         }
 
         function onDestroy() {

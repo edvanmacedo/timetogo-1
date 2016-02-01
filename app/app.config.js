@@ -13,6 +13,9 @@
      * Module configuration.
      */
     function TimeToGoConfig($stateProvider, $urlRouterProvider) {
+        /*
+         * Routes
+         */
         $stateProvider
             .state('home', {
                 url: '/home',
