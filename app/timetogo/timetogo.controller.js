@@ -6,7 +6,7 @@
         .module('TimeToGo')
         .controller('TimeToGoController', TimeToGoController);
 
-    function TimeToGoController($scope, $interval) {
+    function TimeToGoController($scope, $interval, NotificationService) {
         var vm = this;
 
         /*
@@ -30,12 +30,21 @@
         function activate() {
             $scope.$on('$destroy', onDestroy);
 
+            showNotification();
+
             stylesAvailable = [
                 'style-1',
                 'style-2'
             ];
 
             timer = $interval(changeStyle, 800);
+        }
+
+        function showNotification() {
+            var title = "It's Time to Go!";
+            var message = "Your time is up.";
+
+            NotificationService.showNotification(title, message);
         }
 
         function changeStyle() {
@@ -66,7 +75,8 @@
 
     TimeToGoController.$inject = [
         '$scope',
-        '$interval'
+        '$interval',
+        'NotificationService'
     ];
 
 })();

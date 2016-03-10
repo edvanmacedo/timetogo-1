@@ -6,7 +6,7 @@
      * Module creation and configuration
      */
     angular
-        .module('TimeToGo', ['ui.router', 'ngMaterial'])
+        .module('TimeToGo', ['ui.router', 'ngMaterial', 'notification'])
         .config(TimeToGoConfig);
 
     /**

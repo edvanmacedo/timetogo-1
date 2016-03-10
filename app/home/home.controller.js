@@ -9,7 +9,7 @@
     /**
      * Home Controller
      */
-    function HomeController($scope, $interval, $mdDialog, $state) {
+    function HomeController($scope, $interval, $mdDialog, $state, NotificationService) {
         var vm = this;
 
         // Private Attributes
@@ -37,6 +37,7 @@
          */
         function activate() {
             $scope.$on('$destroy', onDestroy);
+            NotificationService.requestPermission();
         }
 
         function onDestroy() {
@@ -159,7 +160,8 @@
         '$scope',
         '$interval',
         '$mdDialog',
-        '$state'
+        '$state',
+        'NotificationService'
     ];
 
 })();

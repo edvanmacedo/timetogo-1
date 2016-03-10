@@ -14,6 +14,7 @@ var sass    = require('gulp-sass');
 
 var BOWER_COMPONENTS_DIR    = 'bower_components';
 var LIBS_DIR                = 'assets/lib';
+var MEDIA_DIR               = 'assets/media';
 var APP_DIR                 = 'app';
 var CSS_DIR                 = 'assets/css';
 var SCSS_DIR                = 'assets/scss';
@@ -21,6 +22,7 @@ var DIST_DIR                = 'dist';
 var DIST_CSS_DIR            = 'dist/' + CSS_DIR;
 var DIST_LIBS_DIR           = 'dist/' + LIBS_DIR;
 var DIST_APP_DIR            = 'dist/' + APP_DIR;
+var DIST_MEDIA_DIR          = 'dist/' + MEDIA_DIR;
 
 /**
  * TASKS
@@ -33,7 +35,8 @@ gulp.task('js-libs', function () {
         BOWER_COMPONENTS_DIR + '/moment/min/moment.min.js',
         BOWER_COMPONENTS_DIR + '/angular-aria/angular-aria.min.js',
         BOWER_COMPONENTS_DIR + '/angular-animate/angular-animate.min.js',
-        BOWER_COMPONENTS_DIR + '/angular-material/angular-material.min.js'
+        BOWER_COMPONENTS_DIR + '/angular-material/angular-material.min.js',
+        BOWER_COMPONENTS_DIR + '/angular-notification/angular-notification.min.js'
     ])
         .pipe(concat('libs.js'))
         .pipe(gulp.dest(LIBS_DIR));
@@ -90,6 +93,9 @@ gulp.task('copy-files-to-dist', function () {
 
     gulp.src(LIBS_DIR + '/**/*')
         .pipe(gulp.dest(DIST_LIBS_DIR));
+
+    gulp.src(MEDIA_DIR + '/**/*')
+        .pipe(gulp.dest(DIST_MEDIA_DIR));
 
     gulp.src('index.html')
         .pipe(gulp.dest(DIST_DIR));
