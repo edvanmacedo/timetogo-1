@@ -21,12 +21,13 @@
         vm.longTimeFormat = 'HH:mm:ss';
         vm.workHoursPerDay = moment({ hours: 9, minutes: 13 });
         vm.startTime = moment({ hours: 0, minutes: 0 });
+        vm.extraTime = moment({ hours: 0, minutes: 0 });
         vm.timeToGetOut = moment({ hours: 0, minutes: 0 });
         vm.remainingTime = moment({ hours: 0, minutes: 0 });
 
         // Public Methods
-        vm.onStartTimeChanged = onStartTimeChanged;
         vm.onStartTimeClicked = onStartTimeClicked;
+        vm.onExtraTimeClicked = onExtraTimeClicked;
         vm.onWorkHoursPerDayClicked = onWorkHoursPerDayClicked;
 
         // Class activation
@@ -50,7 +51,7 @@
             startCountdown();
         }
 
-        function onStartTimeChanged() {
+        function onTimeChanged() {
             updateTimeToGo();
             updateRemainingTime();
             startCountdown();
@@ -63,6 +64,7 @@
             });
 
             vm.timeToGetOut.add(vm.workHoursPerDay);
+            vm.timeToGetOut.add(vm.extraTime);
         }
 
         function calculateRemainingTime() {
@@ -120,6 +122,21 @@
                 .then(onGetTimeInputOk, onGetTimeInputCancel);
         }
 
+        function onExtraTimeClicked() {
+            var dialogOptions = {
+                templateUrl: 'app/timeinputdialog/timeinputdialog.template.html',
+                controller: 'TimeInputDialogController',
+                controllerAs: 'vm',
+                clickOutsideToClose: true,
+                locals: {
+                    member: 'extraTime'
+                }
+            };
+
+            $mdDialog.show(dialogOptions)
+                .then(onGetTimeInputOk, onGetTimeInputCancel);
+        }
+
         function onWorkHoursPerDayClicked() {
             var dialogOptions = {
                 templateUrl: 'app/timeinputdialog/timeinputdialog.template.html',
@@ -144,7 +161,12 @@
 
             case 'startTime':
                 vm.startTime = response.time;
-                onStartTimeChanged();
+                onTimeChanged();
+                break;
+
+            case 'extraTime':
+                vm.extraTime = response.time;
+                onTimeChanged();
                 break;
 
             }
