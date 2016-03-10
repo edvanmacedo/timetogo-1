@@ -16,7 +16,7 @@
 
         function requestPermission() {
             $notification.requestPermission()
-                .then(onResponse);
+                .then(onPermissionRequested);
         }
 
         function showNotification(title, message) {
@@ -29,9 +29,22 @@
             $notification(title, options);
         }
 
-        function onResponse(permission) {
+        function onPermissionRequested(permission) {
             //permission will be 'default', 'granted' or 'denied'
-            console.log('Notification Permission', permission);
+            if (permission == 'denied') {
+                localStorage.setItem('notification_enabled', false);
+            } else if (permission == 'granted') {
+                var title;
+                var message;
+
+                if (!localStorage.getItem('notification_enabled')) {
+                    title = 'Notifications Enabled';
+                    message = 'Now you will be notified with notifications like this one.';
+
+                    showNotification(title, message);
+                    localStorage.setItem('notification_enabled', true);
+                }
+            }
         }
     }
 
