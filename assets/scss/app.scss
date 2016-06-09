@@ -17,6 +17,30 @@
     position: absolute;
 }
 
+.position-fixed {
+    position: fixed;
+}
+
+@media only screen and (max-width: 959px) and (min-width: 0) and (orientation: portrait) {
+    .padding-toolbar {
+        padding-top: 56px;
+    }
+
+    .margin-toolbar {
+        margin-top: 56px;
+    }
+}
+
+@media only screen and (max-width: 959px) and (min-width: 0) and (orientation: landscape) {
+    .padding-toolbar {
+        padding-top: 48px;
+    }
+
+    .margin-toolbar {
+        margin-top: 48px;
+    }
+}
+
 /** TimeToGo view styles **/
 .style-1 {
     background-color: #000000;

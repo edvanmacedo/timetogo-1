@@ -9,7 +9,8 @@
     /**
      * Home Controller
      */
-    function HomeController($scope, $interval, $mdDialog, $state, NotificationService) {
+    function HomeController($rootScope, $scope, $interval, $mdDialog, $state,
+            NotificationService) {
         var vm = this;
 
         // Private Attributes
@@ -37,12 +38,36 @@
          * Methods declarations
          */
         function activate() {
+            var hasTime = false;
+
+            if ($rootScope.timerData) {
+                if ($rootScope.timerData.extraTime) {
+                    vm.extraTime = $rootScope.timerData.extraTime;
+                    hasTime = true;
+                }
+
+                if ($rootScope.timerData.workHoursPerDay) {
+                    vm.workHoursPerDay = $rootScope.timerData.workHoursPerDay;
+                }
+
+                if ($rootScope.timerData.startTime) {
+                    vm.startTime = $rootScope.timerData.startTime;
+                    hasTime = true;
+                }
+
+                if (hasTime) {
+                    startCountdown();
+                }
+            } else {
+                $rootScope.timerData = {};
+            }
+
             $scope.$on('$destroy', onDestroy);
             NotificationService.requestPermission();
         }
 
         function onDestroy() {
-            stopCountdown();
+            //stopCountdown();
         }
 
         function onWorkHoursPerDayChanged() {
@@ -88,6 +113,9 @@
         }
 
         function countdownEnded() {
+            $rootScope.timerData.startTime = undefined;
+            $rootScope.timerData.extraTime = undefined;
+
             stopCountdown();
             $state.go('timetogo');
         }
@@ -156,19 +184,21 @@
             switch (response.member) {
             case 'workHoursPerDay':
                 vm.workHoursPerDay = response.time;
+                $rootScope.timerData.workHoursPerDay = vm.workHoursPerDay;
                 onWorkHoursPerDayChanged();
                 break;
 
             case 'startTime':
                 vm.startTime = response.time;
+                $rootScope.timerData.startTime = vm.startTime;
                 onTimeChanged();
                 break;
 
             case 'extraTime':
                 vm.extraTime = response.time;
+                $rootScope.timerData.extraTime = vm.extraTime;
                 onTimeChanged();
                 break;
-
             }
         }
 
@@ -179,6 +209,7 @@
 
     // dependency injection
     HomeController.$inject = [
+        '$rootScope',
         '$scope',
         '$interval',
         '$mdDialog',
