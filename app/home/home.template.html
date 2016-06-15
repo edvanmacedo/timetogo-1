@@ -1,34 +1,38 @@
-<div layout="column" layout-align="center center" class="text-align-center padding-toolbar" layout-margin>
-    <div layout="column" class="work-hours-per-day">
-        <label class="md-subhead">Work hours/day</label>
-        <md-button ng-click="vm.onWorkHoursPerDayClicked()">
-            <span class="md-display-1">{{ vm.workHoursPerDay.format(vm.shortTimeFormat) }}</span>
-        </md-button>
-    </div>
+<div class="padding-toolbar"></div>
 
-    <div layout="row" layout-margin>
-        <div layout="column" class="time-got-in">
-            <label class="md-subhead">Time you got in</label>
-            <md-button class="md-warn" ng-click="vm.onStartTimeClicked()">
-                <span class="md-display-1">{{ vm.startTime.format(vm.shortTimeFormat) }}</span>
+<md-card>
+    <div layout="column" layout-align="center center" class="text-align-center" layout-margin>
+        <div layout="column" class="work-hours-per-day">
+            <label class="md-subhead">Work hours/day</label>
+            <md-button ng-click="vm.onWorkHoursPerDayClicked()">
+                <span class="md-display-1">{{ vm.workHoursPerDay.format(vm.shortTimeFormat) }}</span>
             </md-button>
         </div>
 
-        <div layout="column" class="extra-time">
-            <label class="md-subhead">Extra time</label>
-            <md-button class="md-warn" ng-click="vm.onExtraTimeClicked()">
-                <span class="md-display-1">{{ vm.extraTime.format(vm.shortTimeFormat) }}</span>
-            </md-button>
+        <div layout="row" layout-margin>
+            <div layout="column" class="time-got-in">
+                <label class="md-subhead">Time you got in</label>
+                <md-button class="md-warn" ng-click="vm.onStartTimeClicked()">
+                    <span class="md-display-1">{{ vm.startTime.format(vm.shortTimeFormat) }}</span>
+                </md-button>
+            </div>
+
+            <div layout="column" class="extra-time">
+                <label class="md-subhead">Extra time</label>
+                <md-button class="md-warn" ng-click="vm.onExtraTimeClicked()">
+                    <span class="md-display-1">{{ vm.extraTime.format(vm.shortTimeFormat) }}</span>
+                </md-button>
+            </div>
+        </div>
+
+        <div layout="column" class="time-to-get-out" flex="20" layout-align="center center" layout-margin>
+            <label class="md-subhead">Time you'll get out</label>
+            <div class="md-display-2">{{ vm.timeToGetOut.format(vm.longTimeFormat) }}</div>
+        </div>
+
+        <div layout="column" class="remaining-time" flex="20" layout-align="center center" layout-margin>
+            <label class="md-subhead">Remaining Time</label>
+            <div class="md-display-2">{{ vm.remainingTime.format(vm.longTimeFormat) }}</div>
         </div>
     </div>
-
-    <div layout="column" class="time-to-get-out" flex="20" layout-align="center center" layout-margin>
-        <label class="md-subhead">Time you'll get out</label>
-        <div class="md-display-2">{{ vm.timeToGetOut.format(vm.longTimeFormat) }}</div>
-    </div>
-
-    <div layout="column" class="remaining-time" flex="20" layout-align="center center" layout-margin>
-        <label class="md-subhead">Remaining Time</label>
-        <div class="md-display-2">{{ vm.remainingTime.format(vm.longTimeFormat) }}</div>
-    </div>
-</div>
+</md-card>

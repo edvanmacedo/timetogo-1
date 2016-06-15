@@ -56,6 +56,8 @@
                 }
 
                 if (hasTime) {
+                    updateTimeToGo();
+                    updateRemainingTime();
                     startCountdown();
                 }
             } else {
