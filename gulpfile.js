@@ -79,7 +79,10 @@ gulp.task('css-app', function () {
 gulp.task('css', ['css-libs', 'css-app']);
 
 gulp.task('css-clean', function () {
-    del(CSS_DIR + '/app.css');
+    del([
+        CSS_DIR + '/app.css',
+        LIBS_DIR + '/libs.css'
+    ]);
 });
 
 gulp.task('copy-files-to-dist', function () {
