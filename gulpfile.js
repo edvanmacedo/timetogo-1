@@ -36,7 +36,8 @@ gulp.task('js-libs', function () {
         BOWER_COMPONENTS_DIR + '/angular-aria/angular-aria.min.js',
         BOWER_COMPONENTS_DIR + '/angular-animate/angular-animate.min.js',
         BOWER_COMPONENTS_DIR + '/angular-material/angular-material.min.js',
-        BOWER_COMPONENTS_DIR + '/angular-notification/angular-notification.min.js'
+        BOWER_COMPONENTS_DIR + '/angular-notification/angular-notification.min.js',
+        BOWER_COMPONENTS_DIR + '/angular-material-data-table/dist/md-data-table.min.js'
     ])
         .pipe(concat('libs.js'))
         .pipe(gulp.dest(LIBS_DIR));
@@ -63,7 +64,7 @@ gulp.task('js-clean', function () {
 gulp.task('css-libs', function () {
     gulp.src([
         BOWER_COMPONENTS_DIR + '/angular-material/angular-material.min.css',
-        BOWER_COMPONENTS_DIR + '/angular-material/angular-material.layouts.min.css'
+        BOWER_COMPONENTS_DIR + '/angular-material-data-table/dist/md-data-table.min.css'
     ])
         .pipe(concat('libs.css'))
         .pipe(gulp.dest(LIBS_DIR));
@@ -100,6 +101,8 @@ gulp.task('copy-files-to-dist', function () {
     gulp.src('index.html')
         .pipe(gulp.dest(DIST_DIR));
 });
+
+gulp.task('dev', ['css', 'js']);
 
 gulp.task('build', ['css', 'js', 'copy-files-to-dist']);
 
